@@ -48,7 +48,7 @@ internal object BreakCommand
                     map("ppppppppp","ccccccchc","bbbbbbbbb", "bbbbbbbbb")
 
                     val playerSlot = mutableListOf<Int>()
-                    for (slot in 36..71)
+                    for (slot in 36..70)
                         slot.let (playerSlot::add)
 
                     val putItemSlots = getSlots('p')
