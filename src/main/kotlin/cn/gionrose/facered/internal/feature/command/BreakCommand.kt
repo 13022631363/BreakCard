@@ -14,6 +14,7 @@ import taboolib.common.platform.command.command
 import taboolib.common.platform.command.subCommand
 import taboolib.common.platform.function.submit
 import taboolib.common5.Baffle
+import taboolib.module.ui.ClickEvent
 import taboolib.module.ui.openMenu
 import taboolib.module.ui.type.Basic
 import taboolib.platform.compat.VaultService
@@ -57,7 +58,10 @@ internal object BreakCommand
                     val cantMoveSlots = getSlots('c')
 
                     cantMoveSlots.forEach {
-                        set(it, ItemStack(Material.FLINT).apply { itemMeta = itemMeta!!.apply {setCustomModelData (10000) }})
+                        set(it, ItemStack(Material.FLINT).apply { itemMeta = itemMeta!!.apply {
+                            setCustomModelData (10000)
+                            setDisplayName(" ")
+                        }})
                     }
                     handoutSlots.forEach {
                         set(it, BreakCard.handoutItemManager.getHandoutItem())
@@ -65,7 +69,11 @@ internal object BreakCommand
 
                     val matchedBreakItem = mutableListOf<BreakItem>()
                     onClick(true) {clickEvent ->
-
+                        if (clickEvent.hotbarKey in 0..9)
+                        {
+                            clickEvent.isCancelled = true
+                            return@onClick
+                        }
                         if (putItemSlots.any (clickEvent.rawSlot::equals) || playerSlot.any (clickEvent.rawSlot::equals))
                             clickEvent.isCancelled = false
 
