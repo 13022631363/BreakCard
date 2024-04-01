@@ -1,8 +1,10 @@
+import io.izzel.taboolib.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.8.21"
-    id("io.izzel.taboolib") version "1.56"
+    id("io.izzel.taboolib") version "2.0.11"
+
 }
 
 group = "org.example"
@@ -31,16 +33,18 @@ repositories {
 }
 
 taboolib {
-    install(
-        "common",
-        "common-5",
-        "platform-bukkit",
-        "module-configuration",
-        "module-chat",
-        "module-lang",
-        "module-ui",
-        "module-nms"
-    )
+    env {
+        install(
+            BUKKIT_ALL,
+            UNIVERSAL,
+            UI,
+            NMS,
+            LANG,
+            CONFIGURATION,
+            CHAT
+        )
+    }
+
     description {
         contributors {
             name("facered")
@@ -57,7 +61,7 @@ taboolib {
 
     // relocate("com.google.gson", "com.google.gson2_9_1")
     classifier = null
-    version = taboolibVersion
+//    version = taboolibVersion
 }
 
 
